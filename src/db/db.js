@@ -1,24 +1,17 @@
-const mongoose = require("mongoose");
-const dbURL=process.env.DATABASE_URL 
-if (!dbURL) {
-    console.error("Mongo URL not set in env file");
-    return new Error("Mongo URL not set in env file");
-  }
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
+const dbURL = process.env.DATABASE_URL;
 
-mongoose.connect(
-    dbURL,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      autoIndex: true,
-    },
-    (error) => {
-      if (error) {
-        console.error(`FAILED to connect using mongoose. ${error}`);
-      } else {
-        console.info("Connected to DB server");
-      }
-    }
-  );
+const dbConnection = () => {
+  mongoose
+    .connect(dbURL)
+    .then(() => {
+      console.log(`Database connected successfully`);
+    })
+    .catch((err) => {
+      console.log("mongoose error", err);
+    });
+};
 
-  module.exports = mongoose;
+export default dbConnection;
