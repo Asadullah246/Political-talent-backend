@@ -7,17 +7,21 @@ app.use(cors());
 app.use(express.json());
 dotenv.config();
 const port = process.env.PORT || 5000;
-import multer from "multer"
-import multerS3 from "multer-s3"
-import AWS from "aws-sdk"
-import { S3Client,ListObjectsV2Command  } from '@aws-sdk/client-s3'
+import multer from "multer";
+import multerS3 from "multer-s3";
+import AWS from "aws-sdk";
+import {
+  S3Client,
+  ListObjectsV2Command,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3";
 
 AWS.config.update({
   region: process.env.AWS_REGION2,
   credentials: {
     accessKeyId: process.env.AWS_KEY2,
-    secretAccessKey: process.env.AWS_PASSWORD2
-  }
+    secretAccessKey: process.env.AWS_PASSWORD2,
+  },
 });
 const s3Client = new S3Client({
   region: process.env.AWS_REGION2,
@@ -32,33 +36,43 @@ dbConnection();
 
 const bucket2 = process.env.AWS_BUCKET2;
 
+const baseURLAWS = "https://political2.s3.amazonaws.com";
+
 const upload = multer({
   storage: multerS3({
     s3: s3Client,
     bucket: bucket2,
     metadata: function (req, file, cb) {
-      console.log("key",process.env.AWS_KEY2, "pass", process.env.AWS_PASSWORD2,"bucket",process.env.AWS_BUCKET2,"region",process.env.AWS_REGION2 );
-      cb(null, {fieldName: file.fieldname});
+      // console.log("key",process.env.AWS_KEY2, "pass", process.env.AWS_PASSWORD2,"bucket",process.env.AWS_BUCKET2,"region",process.env.AWS_REGION2 );
+      cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-      cb(null, Date.now().toString())
-    }
-  })
-})
+      const originalName = file.originalname;
+      const fileExtension = originalName.split(".").pop(); // Get the file extension
+      const fileName = originalName.split(".").shift(); // Get the file name
+      const randomString = Math.random().toString(36).substring(7); // Generate a random string
+      // const currentDate = new Date().toISOString().replace(/:/g, '-'); // Replace colons to prevent issues in the filename
+      const currentDate = new Date().toISOString().split("T")[0];
 
+      // Create a unique filename using the original name, current date, and a random string
+      const uniqueFileName = `${fileName}-${currentDate}-${randomString}.${fileExtension}`;
+
+      cb(null, uniqueFileName);
+    },
+  }),
+});
 
 app.get("/", (req, res, next) => {
   console.log("connected");
   res.send("server running");
 });
 
-
-app.post('/upload', upload.single('file'), (req, res) => {
-  res.send('Successfully uploaded ' + req.file.originalname);
+app.post("/upload", upload.single("file"), (req, res) => {
+  res.send("Successfully uploaded " + req.file.originalname);
   // Handle the uploaded file here
 });
 
-// get the files 
+// get the files
 
 // app.get("/list", async (req, res) => {
 //   try {
@@ -78,7 +92,6 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
 // get by url
 
-
 app.get("/list", async (req, res) => {
   try {
     const params = {
@@ -91,11 +104,11 @@ app.get("/list", async (req, res) => {
     // Generate URLs for each object
     const objectUrls = objects.map((object) => {
       const objectKey = object.Key;
-      const objectUrl = `https://your-s3-bucket-endpoint/${objectKey}`; // Replace with your S3 bucket endpoint
+      const objectUrl = `${baseURLAWS}/${objectKey}`; // Replace with your S3 bucket endpoint
       return objectUrl;
     });
 
-console.log("url", objectUrls);
+    console.log("url", objectUrls);
     res.json(objectUrls);
   } catch (error) {
     console.error("Error listing objects:", error);
@@ -123,26 +136,33 @@ app.get("/getObject/:objectKey", async (req, res) => {
     objectStream.pipe(res);
   } catch (error) {
     console.error("Error getting object:", error);
-    res.status(500).json({ error: "An error occurred while getting the object" });
+    res
+      .status(500)
+      .json({ error: "An error occurred while getting the object" });
   }
 });
 
+// delete file
+app.delete("/deleteObject/:objectKey", async (req, res) => {
+  const objectKey = req.params.objectKey;
+  // const objectKey = "1694776607065";
 
+  try {
+    const params = {
+      Bucket: bucket2, // Replace with your S3 bucket name
+      Key: objectKey,
+    };
 
-// app.get("/download/:filename", async (req, res) => {
-//   const filename = req.params.filename
-//   let x = await s3.getObject({ Bucket: BUCKET, Key: filename }).promise();
-//   res.send(x.Body)
-// })
+    await s3Client.send(new DeleteObjectCommand(params));
 
-// app.delete("/delete/:filename", async (req, res) => {
-//   const filename = req.params.filename
-//   await s3.deleteObject({ Bucket: BUCKET, Key: filename }).promise();
-//   res.send("File Deleted Successfully")
-
-// })
-
-// end of aws file mgmt temporary
+    res.json({ message: "Object deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting object:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while deleting the object" });
+  }
+});
 
 app.all("*", (req, res, next) => {
   res.status(404).json({
