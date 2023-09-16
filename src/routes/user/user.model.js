@@ -10,39 +10,57 @@ const jobSchema = new Schema(
       type: String,
       required: true,
     },
-    password: {
-      type: String,
-      required: true,
+    skill_rating: {
+      type: Number,
+      required: false,
     },
-    status: {
+    skill: [
+      {
+        name: {
+          type: String,
+          required: false,
+        },
+        title: {
+          type:String,
+          required: false,
+        },
+        description: {
+          type:String,
+          required: false,
+        }
+      },
+    ],
+
+    courses: [
+      {
+        course_id: {
+          type: String,
+          required: false,
+        },
+      },
+    ],
+
+    experiences: {
+      type: String,
+      required: false,
+    },
+    phone_number: {
+      type: String,
+      required: false,
+    },
+    address: {
+      type: String,
+      required: false,
+    },
+    description: {
+      type: String,
+      required: false,
+    },
+    image_url: {
       type: String,
       required: false,
     },
 
-    photoURL: {
-      type: String,
-      required: false,
-    },
-    location: {
-      type: String,
-      required: false,
-    },
-    rating: {
-      type: Number,
-      required: false,
-    },
-    designation: {
-      type: String,
-      required: false,
-    },
-    number: {
-      type: String,
-      required: false,
-    },
-    admin: {
-      type: Boolean,
-      required: false,
-    },
   },
   { timestamps: true }
 );
