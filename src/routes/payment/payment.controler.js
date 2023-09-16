@@ -27,7 +27,7 @@ export const CheckoutSession = async (req,res) => {
             success_url: `${'http://localhost:3000/course-details'}`,
             cancel_url: `${'http://localhost:3000/course-details'}`,
         });
-        res.status(200).json({id: session.id});
+        res.status(200).json({id: session.id,session});
     } catch (error) {
         
     }
