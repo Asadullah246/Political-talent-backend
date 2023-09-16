@@ -32,7 +32,12 @@ blogs schema
 
 quiz schema
 
-reviews schema
+testimonial schema
+1. name
+2. designation
+3. image_url
+4. rating
+5. description
 
 contact schema
 banner schema
