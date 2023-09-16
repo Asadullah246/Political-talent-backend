@@ -1,6 +1,6 @@
 
 import {
-  createJob,
+  createuser,
   getJobApi,
   getJobsApi,
   patchJob,
@@ -15,10 +15,9 @@ export const createUserApi = async (
 ) => {
   try {
     const data = req.body;
-    const user = await createJob(data);
+    const user = await createuser(data);
     return res.status(201).json({ status: "success", data: user });
   } catch (error) {
-    console.log(error);
     return res.status(201).json({ massage: error });
   }
 };

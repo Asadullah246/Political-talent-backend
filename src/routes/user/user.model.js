@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const jobSchema = new Schema(
+const userSchema = new Schema(
   {
     name: {
       type: String,
@@ -65,6 +65,7 @@ const jobSchema = new Schema(
   { timestamps: true }
 );
 
-const Job = model("User", jobSchema);
+const user = model("User", userSchema);
 
-export { Job };
+export { user };
+

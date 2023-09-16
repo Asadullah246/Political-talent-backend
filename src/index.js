@@ -1,32 +1,27 @@
+import {
+  DeleteObjectCommand,
+  ListObjectsV2Command,
+  S3Client,
+} from "@aws-sdk/client-s3";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-const app = express();
 import multer from "multer";
 import multerS3 from 'multer-s3';
+const app = express();
 // use middleware
 app.use(cors());
 app.use(express.json());
 dotenv.config();
 const port = process.env.PORT || 5000;
-import {
-  S3Client,
-  ListObjectsV2Command,
-  DeleteObjectCommand,
-} from "@aws-sdk/client-s3";
 
 // database adding
 import dbConnection from "./db/db.js";
+import paymentRoute from "./routes/payment/payment.route.js";
+// user route
+import userRoute from "./routes/user/user.route.js";
+// connect to database
 dbConnection();
-
-// aws update
-// AWS.config.update({
-//   region: process.env.AWS_REGION2,
-//   credentials: {
-//     accessKeyId: process.env.AWS_KEY2,
-//     secretAccessKey: process.env.AWS_PASSWORD2,
-//   },
-// });
 const s3Client = new S3Client({
   region: process.env.AWS_REGION2,
   credentials: {
@@ -36,13 +31,10 @@ const s3Client = new S3Client({
 });
 const bucket2 = process.env.AWS_BUCKET2;
 const baseURLAWS = "https://political2.s3.amazonaws.com";
-
-import paymentRoute from "./routes/payment/payment.route.js";
-
-
 // use payment route
 app.use("/api/v1/payment", paymentRoute);
-
+// use user route
+app.use("/api/v1/user", userRoute);
 // file upload
 const upload = multer({
   storage: multerS3({
@@ -81,7 +73,6 @@ app.post("/upload", upload.single("file"), (req, res) => {
 });
 
 // get the files
-
 app.get("/list", async (req, res) => {
   try {
     const params = {
@@ -99,7 +90,6 @@ app.get("/list", async (req, res) => {
 });
 
 // get by url
-
 app.get("/list", async (req, res) => {
   try {
     const params = {

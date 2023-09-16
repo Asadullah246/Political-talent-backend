@@ -1,13 +1,19 @@
 
-import { Job } from "./user.model.js"; 
 import mongoose from "mongoose";
+import { user } from "./user.model.js";
 const { ObjectId } = mongoose.Types;
 
 // create Job
-export const createJob = async (data) => {
-  const result = new Job(data);
-  await result.save();
-  return result;
+export const createuser = async (data) => {
+  console.log(data);
+  const findUser = await user.findOne({ email: data.email });
+  if (findUser) {
+    return findUser;
+  } else {
+    const result = new user(data);
+    await result.save();
+    return result;
+  }
 };
 
 
@@ -18,24 +24,24 @@ export const patchJob = async ({
   const query = { _id: new ObjectId(_id) };
   const updateDoc = { $set: data };
   const option = { upsert: true, runValidators: true };
-  const result = await Job.findByIdAndUpdate(query, updateDoc, option);
+  const result = await user.findByIdAndUpdate(query, updateDoc, option);
   return result;
 };
 
 // delete Job
 export const removeJob = async (_id) => {
-  const result = await Job.findByIdAndDelete({ _id: new ObjectId(_id) });
+  const result = await user.findByIdAndDelete({ _id: new ObjectId(_id) });
   return result;
 };
 
 // get single Job from DB
 export const getJobApi = async (_id) => {
-  const result = await Job.findOne({ _id: new ObjectId(_id) });
+  const result = await user.findOne({ _id: new ObjectId(_id) });
   return result;
 };
 
 // get Jobs from DB
 export const getJobsApi = async ()=> {
-  const result = await Job.find();
+  const result = await user.find();
   return result;
 };
