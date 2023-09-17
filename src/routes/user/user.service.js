@@ -1,13 +1,11 @@
 
-import mongoose from "mongoose";
 import { user } from "./user.model.js";
-const { ObjectId } = mongoose.Types;
 
 // create Job
 export const createuser = async (data) => {
   const findUser = await user.findOne({ email: data.email });
   if (findUser) {
-    return findUser;
+    return null;
   } else {
     const result = new user(data);
     await result.save();
@@ -34,10 +32,12 @@ export const createuser = async (data) => {
 // };
 
 // get single Job from DB
-// export const getJobApi = async (_id) => {
-//   const result = await user.findOne({ _id: new ObjectId(_id) });
-//   return result;
-// };
+export const getSingelUser = async (id) => {
+  const result = await user.findById(
+    id
+  )
+  return result;
+};
 
 // get Jobs from DB
 export const getALLusers = async ()=> {

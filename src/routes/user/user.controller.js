@@ -1,7 +1,8 @@
 
 import {
   createuser,
-  getALLusers
+  getALLusers,
+  getSingelUser,
 } from "./user.service.js";
 
 // create a single user
@@ -13,6 +14,9 @@ export const createUserApi = async (
   try {
     const data = req.body;
     const user = await createuser(data);
+    if(!user){
+      return res.status(401).json({ massage: "user already exists" });
+    }
     return res.status(200).json({ status: "success", data: user });
   } catch (error) {
     return res.status(401).json({ massage: error });
@@ -52,21 +56,6 @@ export const createUserApi = async (
 //   }
 // };
 
-// get single users
-// export const getUser = async (
-//   req,
-//   res,
-//   next
-// ) => {
-//   try {
-//     const { _id } = req.params;
-//     const users = await getJobApi(_id);
-//     return res.status(201).json({ status: "success", data: users });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(201).json({ massage: error });
-//   }
-// };
 
 // get all users
 export const getUsers = async (
@@ -80,5 +69,21 @@ export const getUsers = async (
   } catch (error) {
     console.log(error);
     return res.status(401).json({ massage: error });
+  }
+};
+// get single users
+export const getUser = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const { id } = req.params;
+
+    const users = await getSingelUser(id);
+    return res.status(201).json({ status: "success", data: users });
+  } catch (error) {
+    console.log(error);
+    return res.status(201).json({ massage: error });
   }
 };

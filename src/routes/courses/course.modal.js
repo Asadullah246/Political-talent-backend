@@ -20,7 +20,7 @@ const courseSchema = new Schema({
     ratings:[
         {
             userId: {
-              type: mongoose.Schema.ObjectId,
+              type: Schema.ObjectId,
               required: false,
               ref: "User",
             },
@@ -36,7 +36,7 @@ const courseSchema = new Schema({
     },
     purchaseStudent:[
         {
-            type: mongoose.Schema.ObjectId,
+            type: Schema.ObjectId,
             ref: "User"
         }
     ],
@@ -76,3 +76,4 @@ const courseSchema = new Schema({
 },{
     timestamps: true,
 });
+export const course = mongoose.model("course", courseSchema);

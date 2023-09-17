@@ -34,7 +34,7 @@ const userSchema = new Schema(
     courses: [
       {
         course_id: {
-          type: String,
+          type: Schema.ObjectId,
           required: false,
         },
       },

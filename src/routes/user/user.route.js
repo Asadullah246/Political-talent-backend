@@ -1,6 +1,6 @@
 // const get user
 import express from "express";
-import { createUserApi, getUsers } from "./user.controller.js";
+import { createUserApi, getUser, getUsers } from "./user.controller.js";
 const router = express.Router();
 // post single users
 router.post("/create", createUserApi);
@@ -9,7 +9,7 @@ router.post("/create", createUserApi);
 // delete single users
 // router.delete("/:_id", deleteUser);
 // single users
-// router.get("/:_id", getUser);
+router.get("/singel/:id", getUser);
 // all users
 router.get("/alluser", getUsers);
 
