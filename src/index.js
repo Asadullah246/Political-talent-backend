@@ -19,6 +19,7 @@ const port = process.env.PORT || 5000;
 import dbConnection from "./db/db.js";
 import paymentRoute from "./routes/payment/payment.route.js";
 // user route
+import course from "./routes/courses/courses.route.js";
 import userRoute from "./routes/user/user.route.js";
 // connect to database
 dbConnection();
@@ -35,6 +36,8 @@ const baseURLAWS = "https://political2.s3.amazonaws.com";
 app.use("/api/v1/payment", paymentRoute);
 // use user route
 app.use("/api/v1/user", userRoute);
+// use course route
+app.use("/api/v1/course", course);
 // file upload
 const upload = multer({
   storage: multerS3({

@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const courseSchema = new Schema({
     name: {
@@ -72,8 +72,12 @@ const courseSchema = new Schema({
                 required: true,
             }
         }
-    ]
+    ],
+    premium:{
+        type:Boolean,
+        required: true,
+    }
 },{
     timestamps: true,
 });
-export const course = mongoose.model("course", courseSchema);
+export const course = model("course", courseSchema);
