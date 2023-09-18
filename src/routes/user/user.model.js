@@ -60,6 +60,14 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    country: {
+      type: String,
+      required: false,
+    },
+    tittle:{
+      type: String,
+      required: false,
+    }
 
   },
   { timestamps: true }
