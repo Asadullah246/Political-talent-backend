@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 
 const courseSchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
     },
@@ -19,6 +19,10 @@ const courseSchema = new Schema(
       type: Number,
       required: true,
     },
+
+    // need to write reviews here
+
+
     ratings: [
       {
         userId: {
@@ -57,6 +61,34 @@ const courseSchema = new Schema(
           required: true,
         },
         length: {
+          type: String,
+          required: false,
+        },
+      },
+    ],
+    reviews: [
+      {
+        name: {
+          type: String,
+          required: false,
+        },
+        image: {
+          type: String,
+          required: false,
+        },
+        userId: {
+          type: String,
+          required: false,
+        },
+        rating: {
+          type: String,
+          required: true,
+        },
+        description: {
+          type: String,
+          required: true,
+        },
+        designation: {
           type: String,
           required: false,
         },
