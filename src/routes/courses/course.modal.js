@@ -7,10 +7,19 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
-      type: String,
-      required: true,
-    },
+    description: [
+      {
+        para: {
+          type: String,
+          required: false,
+
+        },
+        lists:[
+          {type :String ,
+            required:false}
+        ]
+      },
+    ],
     imageThumb: {
       type: String,
       required: true,

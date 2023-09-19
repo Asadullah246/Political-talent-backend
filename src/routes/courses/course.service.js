@@ -1,6 +1,6 @@
 
 import { ObjectId } from "mongodb";
-import { course } from "./course.modal.js"; 
+import { course } from "./course.modal.js";
 // const { ObjectId } = mongoose.Types;
 
 
@@ -43,3 +43,5 @@ export const getALLusers = async ()=> {
   const result = await course.find({});
   return result;
 };
+
+
