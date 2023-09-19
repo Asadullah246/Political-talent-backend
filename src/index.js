@@ -21,8 +21,12 @@ import dbConnection from "./db/db.js";
 // routes
 
 import paymentRoute from "./routes/payment/payment.route.js";
+// user route
+import course from "./routes/courses/courses.route.js";
 import userRoute from "./routes/user/user.route.js";
-import courseRoute from "./routes/courses/course.route.js";
+
+
+
 
 
 // connect to database
@@ -41,7 +45,8 @@ app.use("/api/v1/payment", paymentRoute);
 // use user route
 app.use("/api/v1/user", userRoute);
 // use course route
-app.use("/api/v1/course", courseRoute);
+
+app.use("/api/v1/course", course);
 
 // file upload
 const upload = multer({
