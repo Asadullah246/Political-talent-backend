@@ -1,15 +1,9 @@
 import Stripe from 'stripe';
-import { course } from '../courses/course.modal.js';
 export const CheckoutSession = async (req,res) => {
     try {
+      const stripe = new Stripe(process.env.STRIPE_SECRET);
+      console.log(process.env.STRIPE_SECRET);
       const {video} = req.body;
-      const id = req.params;
-      console.log(id);
-      const premium = await course.findById(id);
-      console.log(premium);
-      if(premium.premium){
-        console.log("This is a premium course");
-          const stripe = new Stripe(process.env.STRIPE_SECRET);
           const userId = video?.clerkUserId
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -20,9 +14,9 @@ export const CheckoutSession = async (req,res) => {
                 price_data: {
                   currency: 'usd',
                   product_data: {
-                    name: premium.name,
+                    name: video.title,
                   },
-                  unit_amount: premium.price * 100,
+                  unit_amount: video.price * 100,
                 },
                 quantity: 1,
               },
@@ -31,15 +25,10 @@ export const CheckoutSession = async (req,res) => {
                 userId
             },
             mode: 'payment',
-            success_url: `http://localhost:3000/course-details/${id}`,
-            cancel_url: `http://localhost:3000/course-details/${id}`,
+            success_url: `http://localhost:3000/course`,
+            cancel_url: `http://localhost:3000/course`,
         });
         res.status(200).json({id: session.id,session});
-        }
-        else{
-          console.log("This is a free course");
-          res.status(200).json({message:"This is a free course"});
-        }
     } catch (error) {
         
     }
