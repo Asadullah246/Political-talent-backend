@@ -17,9 +17,14 @@ const port = process.env.PORT || 5000;
 
 // database adding
 import dbConnection from "./db/db.js";
+
+// routes
+
 import paymentRoute from "./routes/payment/payment.route.js";
-// user route
 import userRoute from "./routes/user/user.route.js";
+import courseRoute from "./routes/courses/course.route.js";
+
+
 // connect to database
 dbConnection();
 const s3Client = new S3Client({
@@ -35,11 +40,14 @@ const baseURLAWS = "https://political2.s3.amazonaws.com";
 app.use("/api/v1/payment", paymentRoute);
 // use user route
 app.use("/api/v1/user", userRoute);
+// use course route
+app.use("/api/v1/course", courseRoute);
+
 // file upload
 const upload = multer({
   storage: multerS3({
     s3: s3Client,
-    // acl: "public-read",
+    acl: "public-read",
     bucket: bucket2,
     metadata: function (req, file, cb) {
       // console.log("key",process.env.AWS_KEY2, "pass", process.env.AWS_PASSWORD2,"bucket",process.env.AWS_BUCKET2,"region",process.env.AWS_REGION2 );
