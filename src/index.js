@@ -1,13 +1,9 @@
-import {
-  DeleteObjectCommand,
-  ListObjectsV2Command,
-  S3Client,
-} from "@aws-sdk/client-s3";
+
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import multer from "multer";
-import multerS3 from 'multer-s3';
+// import multer from "multer";
+// import multerS3 from 'multer-s3'; 
 const app = express();
 // use middleware
 app.use(cors());
@@ -31,15 +27,7 @@ import userRoute from "./routes/user/user.route.js";
 
 // connect to database
 dbConnection();
-const s3Client = new S3Client({
-  region: process.env.AWS_REGION2,
-  credentials: {
-    accessKeyId: process.env.AWS_KEY2,
-    secretAccessKey: process.env.AWS_PASSWORD2,
-  },
-});
-const bucket2 = process.env.AWS_BUCKET2;
-const baseURLAWS = "https://political2.s3.amazonaws.com";
+
 // use payment route
 app.use("/api/v1/payment", paymentRoute);
 // use user route
@@ -49,29 +37,29 @@ app.use("/api/v1/user", userRoute);
 app.use("/api/v1/course", course);
 
 // file upload
-const upload = multer({
-  storage: multerS3({
-    s3: s3Client,
-    acl: "public-read",
-    bucket: bucket2,
-    metadata: function (req, file, cb) {
-      // console.log("key",process.env.AWS_KEY2, "pass", process.env.AWS_PASSWORD2,"bucket",process.env.AWS_BUCKET2,"region",process.env.AWS_REGION2 );
-      cb(null, { fieldName: file.fieldname });
-    },
-    key: function (req, file, cb) {
-      const originalName = file.originalname;
-      const fileExtension = originalName.split(".").pop(); // Get the file extension
-      const fileName = originalName.split(".").shift(); // Get the file name
-      const randomString = Math.random().toString(36).substring(7); // Generate a random string
-      const currentDate = new Date().toISOString().split("T")[0];
+// const upload = multer({
+//   storage: multerS3({
+//     s3: s3Client,
+//     acl: "public-read",
+//     bucket: bucket2,
+//     metadata: function (req, file, cb) {
+//       // console.log("key",process.env.AWS_KEY2, "pass", process.env.AWS_PASSWORD2,"bucket",process.env.AWS_BUCKET2,"region",process.env.AWS_REGION2 );
+//       cb(null, { fieldName: file.fieldname });
+//     },
+//     key: function (req, file, cb) {
+//       const originalName = file.originalname;
+//       const fileExtension = originalName.split(".").pop(); // Get the file extension
+//       const fileName = originalName.split(".").shift(); // Get the file name
+//       const randomString = Math.random().toString(36).substring(7); // Generate a random string
+//       const currentDate = new Date().toISOString().split("T")[0];
 
-      // Create a unique filename using the original name, current date, and a random string
-      const uniqueFileName = `${fileName}-${currentDate}-${randomString}.${fileExtension}`;
+//       // Create a unique filename using the original name, current date, and a random string
+//       const uniqueFileName = `${fileName}-${currentDate}-${randomString}.${fileExtension}`;
 
-      cb(null, uniqueFileName);
-    },
-  }),
-});
+//       cb(null, uniqueFileName);
+//     },
+//   }),
+// });
 
 // routes
 
@@ -81,9 +69,9 @@ app.get("/", (req, res, next) => {
 });
 
 // upload files
-app.post("/upload", upload.single("file"), (req, res) => {
-  res.send("Successfully uploaded " + req.file.originalname);
-});
+// app.post("/upload", upload.single("file"), (req, res) => {
+//   res.send("Successfully uploaded " + req.file.originalname);
+// });
 
 // get the files
 app.get("/list", async (req, res) => {
