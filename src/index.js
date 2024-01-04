@@ -23,6 +23,7 @@ import course from "./routes/courses/courses.route.js";
 import userRoute from "./routes/user/user.route.js";
 import quiz from "./routes/PolitiQTest/testimonial.route.js";
 import faq from "./routes/faq/testimonial.route.js";
+import websiteInfo from "./routes/websiteInfo/testimonial.route.js";
 
 
 
@@ -40,7 +41,7 @@ app.use("/api/v1/user", userRoute);
 app.use("/api/v1/course", course);
 
 
-app.use("/api/v1/websiteInfo", course);
+app.use("/api/v1/websiteInfo", websiteInfo);
 
 app.use("/api/v1/quiz", quiz);
 
