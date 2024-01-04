@@ -4,6 +4,7 @@ import {
   getJobApi,
   getJobsApi,
   patchJob,
+  patchJob2,
   removeJob,
 } from "./testimonial.service.js";
 
@@ -34,6 +35,21 @@ export const updateUser = async (
     const { _id } = req.params;
     const data = req.body;
     const user = await patchJob({ _id, data });
+    return res.status(201).json({ status: "success", data: user });
+  } catch (error) {
+    console.log(error);
+    return res.status(401).json({ massage: error });
+  }
+};
+export const updateUser2 = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    // const { _id } = req.params; 
+    const data = req.body;
+    const user = await patchJob2(data );
     return res.status(201).json({ status: "success", data: user });
   } catch (error) {
     console.log(error);

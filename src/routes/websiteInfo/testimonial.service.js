@@ -21,6 +21,15 @@ export const patchJob = async ({
   const result = await Job.findByIdAndUpdate(query, updateDoc, option);
   return result;
 };
+export const patchJob2 = async ({
+  data,
+})=> {
+  const query = {  };
+  const updateDoc = { $set: data };
+  const option = { upsert: true, runValidators: false };  
+  const result = await Job.findByIdAndUpdate(query, updateDoc, option);
+  return result;
+};
 
 // delete Job
 export const removeJob = async (_id) => {
