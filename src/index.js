@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 // import multer from "multer";
-// import multerS3 from 'multer-s3'; 
+// import multerS3 from 'multer-s3';
 const app = express();
 // use middleware
 app.use(cors());
@@ -20,6 +20,7 @@ import paymentRoute from "./routes/payment/payment.route.js";
 // user route
 import course from "./routes/courses/courses.route.js";
 import userRoute from "./routes/user/user.route.js";
+import websiteInfo from "./routes/websiteInfo/testimonial.route.js";
 
 
 
@@ -35,6 +36,7 @@ app.use("/api/v1/user", userRoute);
 // use course route
 
 app.use("/api/v1/course", course);
+app.use("/api/v1/websiteInfo", websiteInfo);
 
 // file upload
 // const upload = multer({
