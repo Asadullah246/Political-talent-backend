@@ -36,6 +36,9 @@ app.use("/api/v1/user", userRoute);
 
 app.use("/api/v1/course", course);
 
+
+app.use("/api/v1/websiteInfo", course);
+
 // file upload
 // const upload = multer({
 //   storage: multerS3({
