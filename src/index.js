@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 // import multer from "multer";
-// import multerS3 from 'multer-s3'; 
+// import multerS3 from 'multer-s3';
 const app = express();
 // use middleware
 app.use(cors());
@@ -39,6 +39,7 @@ app.use("/api/v1/user", userRoute);
 // use course route
 
 app.use("/api/v1/course", course);
+app.use("/api/v1/websiteInfo", websiteInfo);
 
 
 app.use("/api/v1/websiteInfo", websiteInfo);

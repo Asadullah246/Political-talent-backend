@@ -12,13 +12,25 @@ const jobSchema = new Schema(
     },
     phone: {
       type: Number,
-      required: true,
+      required: false,
     },
     email: {
       type: String,
       required: false,
     },
     address: {
+      type: String,
+      required: false,
+    },
+    facebook: {
+      type: String,
+      required: false,
+    },
+    twitter: {
+      type: String,
+      required: false,
+    },
+    instagram: {
       type: String,
       required: false,
     },
@@ -32,4 +44,4 @@ const jobSchema = new Schema(
 
 const Job = model("websiteInfo", jobSchema);
 
-export { Job };
+export { Job }; 
