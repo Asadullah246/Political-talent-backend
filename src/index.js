@@ -14,12 +14,15 @@ const port = process.env.PORT || 5000;
 // database adding
 import dbConnection from "./db/db.js";
 
+
 // routes
 
 import paymentRoute from "./routes/payment/payment.route.js";
 // user route
 import course from "./routes/courses/courses.route.js";
 import userRoute from "./routes/user/user.route.js";
+import quiz from "./routes/PolitiQTest/testimonial.route.js";
+import faq from "./routes/faq/testimonial.route.js";
 import websiteInfo from "./routes/websiteInfo/testimonial.route.js";
 
 
@@ -37,6 +40,13 @@ app.use("/api/v1/user", userRoute);
 
 app.use("/api/v1/course", course);
 app.use("/api/v1/websiteInfo", websiteInfo);
+
+
+app.use("/api/v1/websiteInfo", websiteInfo);
+
+app.use("/api/v1/quiz", quiz);
+
+app.use("/api/v1/faq", faq);
 
 // file upload
 // const upload = multer({

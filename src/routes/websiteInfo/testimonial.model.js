@@ -20,7 +20,19 @@ const jobSchema = new Schema(
     },
     address: {
       type: String,
-      required: false,    
+      required: false,
+    },
+    facebook: {
+      type: String,
+      required: false,
+    },
+    twitter: {
+      type: String,
+      required: false,
+    },
+    instagram: {
+      type: String,
+      required: false,
     },
     description: {
       type: String,
@@ -30,6 +42,6 @@ const jobSchema = new Schema(
   { timestamps: true }
 );
 
-const Job = model("WebsiteInfo", jobSchema);
+const Job = model("websiteInfo", jobSchema);
 
-export { Job };
+export { Job }; 
