@@ -4,9 +4,13 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: false,
     },
     email: {
+      type: String,
+      required: false,
+    },
+    signingId: {
       type: String,
       required: true,
     },
@@ -14,22 +18,22 @@ const userSchema = new Schema(
       type: Number,
       required: false,
     },
-    skill: [
-      {
-        name: {
-          type: String,
-          required: false,
-        },
-        title: {
-          type:String,
-          required: false,
-        },
-        description: {
-          type:String,
-          required: false,
-        }
-      },
-    ],
+    // skill: [
+    //   {
+    //     name: {
+    //       type: String,
+    //       required: false,
+    //     },
+    //     title: {
+    //       type:String,
+    //       required: false,
+    //     },
+    //     description: {
+    //       type:String,
+    //       required: false,
+    //     }
+    //   },
+    // ],
 
     courses: [
       {
@@ -44,13 +48,13 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
-    phone_number: {
+    phone: {
       type: String,
-      required: false,
+      required: true,
     },
     address: {
       type: String,
-      required: false,
+      required: true,
     },
     description: {
       type: String,
@@ -62,6 +66,10 @@ const userSchema = new Schema(
     },
     country: {
       type: String,
+      required: true,
+    },
+    skills: {
+      type: String, 
       required: false,
     },
     tittle:{

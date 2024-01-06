@@ -3,6 +3,7 @@ import {
   createuser,
   getALLusers,
   getSingelUser,
+  patchJob,
 } from "./user.service.js";
 
 // create a single user
@@ -24,37 +25,37 @@ export const createUserApi = async (
 };
 
 // patch a single user
-// export const updateUser = async (
-//   req,
-//   res,
-//   next
-// ) => {
-//   try {
-//     const { _id } = req.params;
-//     const data = req.body;
-//     const user = await patchJob({ _id, data });
-//     return res.status(201).json({ status: "success", data: user });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(401).json({ massage: error });
-//   }
-// };
+export const updateUser = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const { _id } = req.params;
+    const data = req.body;
+    const user = await patchJob({ _id, data });
+    return res.status(201).json({ status: "success", data: user });
+  } catch (error) {
+    console.log(error);
+    return res.status(401).json({ massage: error });
+  }
+};
 
 // delete a single user
-// export const deleteUser = async (
-//   req,
-//   res,
-//   next
-// ) => {
-//   try {
-//     const { _id } = req.params;
-//     const user = await removeJob(_id);
-//     return res.status(201).json({ status: "success", data: user });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(201).json({ massage: error });
-//   }
-// };
+export const deleteUser = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const { _id } = req.params;
+    const user = await removeJob(_id);
+    return res.status(201).json({ status: "success", data: user });
+  } catch (error) {
+    console.log(error);
+    return res.status(201).json({ massage: error });
+  }
+};
 
 
 // get all users

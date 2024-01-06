@@ -34,18 +34,11 @@ dbConnection();
 
 // use payment route
 app.use("/api/v1/payment", paymentRoute);
-// use user route
 app.use("/api/v1/user", userRoute);
-// use course route
-
 app.use("/api/v1/course", course);
 app.use("/api/v1/websiteInfo", websiteInfo);
-
-
 app.use("/api/v1/websiteInfo", websiteInfo);
-
 app.use("/api/v1/quiz", quiz);
-
 app.use("/api/v1/faq", faq);
 
 // file upload
