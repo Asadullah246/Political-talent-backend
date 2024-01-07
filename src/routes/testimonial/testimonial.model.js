@@ -6,17 +6,9 @@ const jobSchema = new Schema(
       type: String,
       required: true,
     },
-    email: {
-      type: String,
-      required: false,
-    },
     designation: {
       type: String,
       required: true,
-    },
-    image_url: {
-      type: String,
-      required: false,
     },
     rating: {
       type: Number,
@@ -31,5 +23,6 @@ const jobSchema = new Schema(
 );
 
 const Job = model("Testimonial", jobSchema);
+
 
 export { Job };
