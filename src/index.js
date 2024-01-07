@@ -67,7 +67,7 @@ app.use("/api/v1/faq", faq);
 app.use("/api/v1/talent", faq);
 app.use("/api/v1/testimonial", testimonial);
 app.use("/api/v1/contact", contact);
-app.use("/api/v1/newslatter", newslatter);
+app.use("/api/v1/newsletter", newslatter);
 app.use("/api/v1/askquestions", askquestions);
 
 
