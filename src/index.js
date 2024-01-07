@@ -5,14 +5,32 @@ import express from "express";
 // import multer from "multer";
 // import multerS3 from 'multer-s3';
 const app = express();
+
+
 // use middleware
 app.use(cors());
 app.use(express.json());
 dotenv.config();
 const port = process.env.PORT || 5000;
 
+import path from "path"; // Import the 'path' module
+import multer from "multer";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+console.log("path is ",path.join(__dirname, "uploads") )
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/src/uploads", express.static(path.join(__dirname, "uploads")));
+
+
 // database adding
-import dbConnection from "./db/db.js";
+import dbConnection from "./db/db.js"; 
+
+
+
 
 
 // routes
