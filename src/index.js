@@ -45,6 +45,7 @@ import websiteInfo from "./routes/websiteInfo/testimonial.route.js";
 import testimonial from "./routes/testimonial/testimonial.route.js"; 
 import blogs from "./routes/blogs/testimonial.route.js";
 import contact from "./routes/contact/testimonial.route.js";
+import newslatter from "./routes/newsLatter/testimonial.route.js";
 
 
 
@@ -64,6 +65,7 @@ app.use("/api/v1/faq", faq);
 app.use("/api/v1/talent", faq);
 app.use("/api/v1/testimonial", testimonial);
 app.use("/api/v1/contact", contact);
+app.use("/api/v1/newslatter", newslatter);
 
 // file upload
 // const upload = multer({
