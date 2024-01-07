@@ -1,4 +1,5 @@
 
+import multer from "multer";
 import {
   createJob,
   getJobApi,
@@ -6,6 +7,10 @@ import {
   patchJob,
   removeJob,
 } from "./testimonial.service.js";
+
+
+const upload = multer({ dest: 'uploads/' });
+
 
 // create a single user
 export const createUserApi = async (
@@ -15,6 +20,14 @@ export const createUserApi = async (
 ) => {
   try {
     const data = req.body;
+
+    if (req.file) {
+      // Save the file path to the database
+      const imagePath = `/uploads/${req.file.filename}`;
+      data.logoImage = imagePath;
+    }
+
+
     const user = await createJob(data);
     return res.status(201).json({ status: "success", data: user });
   } catch (error) {
@@ -32,6 +45,13 @@ export const updateUser = async (
   try {
     const { _id } = req.params;
     const data = req.body;
+
+    if (req.file) {
+      // Save the file path to the database
+      const imagePath = `/uploads/${req.file.filename}`;
+      data.logoImage = imagePath;
+    }
+ 
     const user = await patchJob({ _id, data });
     return res.status(201).json({ status: "success", data: user });
   } catch (error) {
