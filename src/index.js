@@ -5,14 +5,32 @@ import express from "express";
 // import multer from "multer";
 // import multerS3 from 'multer-s3';
 const app = express();
+
+
 // use middleware
 app.use(cors());
 app.use(express.json());
 dotenv.config();
 const port = process.env.PORT || 5000;
 
+import path from "path"; // Import the 'path' module
+import multer from "multer";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+console.log("path is ",path.join(__dirname, "uploads") )
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/src/uploads", express.static(path.join(__dirname, "uploads")));
+
+
 // database adding
-import dbConnection from "./db/db.js";
+import dbConnection from "./db/db.js"; 
+
+
+
 
 
 // routes
@@ -24,8 +42,9 @@ import userRoute from "./routes/user/user.route.js";
 import quiz from "./routes/PolitiQTest/testimonial.route.js";
 import faq from "./routes/faq/testimonial.route.js";
 import websiteInfo from "./routes/websiteInfo/testimonial.route.js";
-import blogs from "./routes/blogs/testimonial.route.js"; 
 import testimonial from "./routes/testimonial/testimonial.route.js"; 
+import blogs from "./routes/blogs/testimonial.route.js";
+import contact from "./routes/contact/testimonial.route.js";
 
 
 
@@ -44,6 +63,7 @@ app.use("/api/v1/quiz", quiz);
 app.use("/api/v1/faq", faq);
 app.use("/api/v1/talent", faq);
 app.use("/api/v1/testimonial", testimonial);
+app.use("/api/v1/contact", contact);
 
 // file upload
 // const upload = multer({

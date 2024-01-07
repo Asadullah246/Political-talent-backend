@@ -2,14 +2,11 @@ import { Schema, model } from "mongoose";
 
 const jobSchema = new Schema(
   {
-    websiteName: {
+    name: {
       type: String,
       required: false,
     },
-    logoImage: {
-      type: String,
-      required: false,
-    },
+
     phone: {
       type: Number,
       required: false,
@@ -18,19 +15,7 @@ const jobSchema = new Schema(
       type: String,
       required: false,
     },
-    address: {
-      type: String,
-      required: false,
-    },
-    facebook: {
-      type: String,
-      required: false,
-    },
-    twitter: {
-      type: String,
-      required: false,
-    },
-    instagram: {
+    subject: {
       type: String,
       required: false,
     },
@@ -38,10 +23,14 @@ const jobSchema = new Schema(
       type: String,
       required: false,
     },
+    archived: {
+      type: Boolean,
+      required: false,
+    },
   },
   { timestamps: true }
 );
 
-const Job = model("websiteInfo", jobSchema);
+const Job = model("Contact", jobSchema);
 
-export { Job }; 
+export { Job };

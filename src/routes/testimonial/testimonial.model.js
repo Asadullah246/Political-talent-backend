@@ -22,6 +22,7 @@ const jobSchema = new Schema(
   { timestamps: true }
 );
 
-const Job = model("testimonial", jobSchema);
+const Job = model("Testimonial", jobSchema);
+
 
 export { Job };
