@@ -27,7 +27,7 @@ app.use("/src/uploads", express.static(path.join(__dirname, "uploads")));
 
 
 // database adding
-import dbConnection from "./db/db.js"; 
+import dbConnection from "./db/db.js";
 
 
 
@@ -42,10 +42,12 @@ import userRoute from "./routes/user/user.route.js";
 import quiz from "./routes/PolitiQTest/testimonial.route.js";
 import faq from "./routes/faq/testimonial.route.js";
 import websiteInfo from "./routes/websiteInfo/testimonial.route.js";
-import testimonial from "./routes/testimonial/testimonial.route.js"; 
+import testimonial from "./routes/testimonial/testimonial.route.js";
 import blogs from "./routes/blogs/testimonial.route.js";
 import contact from "./routes/contact/testimonial.route.js";
 import newslatter from "./routes/newsLatter/testimonial.route.js";
+import askquestions from "./routes/askquestions/testimonial.route.js";
+
 
 
 
@@ -66,6 +68,8 @@ app.use("/api/v1/talent", faq);
 app.use("/api/v1/testimonial", testimonial);
 app.use("/api/v1/contact", contact);
 app.use("/api/v1/newslatter", newslatter);
+app.use("/api/v1/askquestions", askquestions);
+
 
 // file upload
 // const upload = multer({
