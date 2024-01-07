@@ -25,6 +25,7 @@ import quiz from "./routes/PolitiQTest/testimonial.route.js";
 import faq from "./routes/faq/testimonial.route.js";
 import websiteInfo from "./routes/websiteInfo/testimonial.route.js";
 import blogs from "./routes/blogs/testimonial.route.js"; 
+import testimonial from "./routes/testimonial/testimonial.route.js"; 
 
 
 
@@ -42,6 +43,7 @@ app.use("/api/v1/blogs", blogs);
 app.use("/api/v1/quiz", quiz);
 app.use("/api/v1/faq", faq);
 app.use("/api/v1/talent", faq);
+app.use("/api/v1/testimonial", testimonial);
 
 // file upload
 // const upload = multer({
