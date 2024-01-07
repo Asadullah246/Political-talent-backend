@@ -40,6 +40,7 @@ app.use("/api/v1/websiteInfo", websiteInfo);
 app.use("/api/v1/websiteInfo", websiteInfo);
 app.use("/api/v1/quiz", quiz);
 app.use("/api/v1/faq", faq);
+app.use("/api/v1/talent", faq);
 
 // file upload
 // const upload = multer({
