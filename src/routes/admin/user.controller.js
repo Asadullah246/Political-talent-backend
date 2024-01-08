@@ -1,11 +1,12 @@
 
 import {
-  createJob,
-  getJobApi,
-  getJobsApi,
+  createuser,
+  createuser2,
+  getALLusers,
+  getSingelUser,
   patchJob,
   removeJob,
-} from "./testimonial.service.js";
+} from "./user.service.js";
 
 // create a single user
 export const createUserApi = async (
@@ -15,19 +16,30 @@ export const createUserApi = async (
 ) => {
   try {
     const data = req.body;
-
-
-    if (req.file) {
-      // Save the file path to the database
-      const imagePath = `/uploads/${req.file.filename}`;
-      data.logoImage = imagePath;
-    }
-
-    const user = await createJob(data);
+    const user = await createuser(data);
+    // if(!user){
+    //   return res.status(401).json({ massage: "user already exists" });
+    // }
+    // return res.status(200).json({ status: "success", data: user });
     return res.status(201).json({ status: "success", data: user });
   } catch (error) {
-    console.log(error);
-    return res.status(201).json({ massage: error });
+    return res.status(401).json({ massage: error });
+  }
+};
+export const createUserApi2 = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const data = req.body;
+    const user = await createuser2(data);
+    if(!user){
+      return res.status(401).json({ massage: " no user found " });
+    }
+    return res.status(200).json({ status: "success", data: user });
+  } catch (error) {
+    return res.status(401).json({ massage: error });
   }
 };
 
@@ -40,14 +52,6 @@ export const updateUser = async (
   try {
     const { _id } = req.params;
     const data = req.body;
-
-
-    if (req.file) {
-      // Save the file path to the database
-      const imagePath = `/uploads/${req.file.filename}`;
-      data.logoImage = imagePath;
-    }
-    
     const user = await patchJob({ _id, data });
     return res.status(201).json({ status: "success", data: user });
   } catch (error) {
@@ -72,21 +76,6 @@ export const deleteUser = async (
   }
 };
 
-// get single users
-export const getUser = async (
-  req,
-  res,
-  next
-) => {
-  try {
-    const { _id } = req.params;
-    const users = await getJobApi(_id);
-    return res.status(201).json({ status: "success", data: users });
-  } catch (error) {
-    console.log(error);
-    return res.status(201).json({ massage: error });
-  }
-};
 
 // get all users
 export const getUsers = async (
@@ -95,7 +84,23 @@ export const getUsers = async (
   next
 ) => {
   try {
-    const users = await getJobsApi();
+    const users = await getALLusers();
+    return res.status(200).json({ status: "success", data: users });
+  } catch (error) {
+    console.log(error);
+    return res.status(401).json({ massage: error });
+  }
+};
+// get single users
+export const getUser = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const { id } = req.params;
+
+    const users = await getSingelUser(id);
     return res.status(201).json({ status: "success", data: users });
   } catch (error) {
     console.log(error);

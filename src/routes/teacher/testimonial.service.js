@@ -5,10 +5,9 @@ const { ObjectId } = mongoose.Types;
 
 // create Job
 export const createJob = async (data) => {
-  console.log("hitting", data)
   const result = new Job(data);
   await result.save();
-  return result; 
+  return result;
 };
 
 

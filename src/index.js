@@ -47,6 +47,8 @@ import blogs from "./routes/blogs/testimonial.route.js";
 import contact from "./routes/contact/testimonial.route.js";
 import newslatter from "./routes/newsLatter/testimonial.route.js";
 import askquestions from "./routes/askquestions/testimonial.route.js";
+import teacher from "./routes/teacher/testimonial.route.js";
+import admin from "./routes/admin/user.route.js";
 
 
 
@@ -69,32 +71,9 @@ app.use("/api/v1/testimonial", testimonial);
 app.use("/api/v1/contact", contact);
 app.use("/api/v1/newsletter", newslatter);
 app.use("/api/v1/askquestions", askquestions);
+app.use("/api/v1/admin", admin);
+app.use("/api/v1/teacher", teacher);
 
-
-// file upload
-// const upload = multer({
-//   storage: multerS3({
-//     s3: s3Client,
-//     acl: "public-read",
-//     bucket: bucket2,
-//     metadata: function (req, file, cb) {
-//       // console.log("key",process.env.AWS_KEY2, "pass", process.env.AWS_PASSWORD2,"bucket",process.env.AWS_BUCKET2,"region",process.env.AWS_REGION2 );
-//       cb(null, { fieldName: file.fieldname });
-//     },
-//     key: function (req, file, cb) {
-//       const originalName = file.originalname;
-//       const fileExtension = originalName.split(".").pop(); // Get the file extension
-//       const fileName = originalName.split(".").shift(); // Get the file name
-//       const randomString = Math.random().toString(36).substring(7); // Generate a random string
-//       const currentDate = new Date().toISOString().split("T")[0];
-
-//       // Create a unique filename using the original name, current date, and a random string
-//       const uniqueFileName = `${fileName}-${currentDate}-${randomString}.${fileExtension}`;
-
-//       cb(null, uniqueFileName);
-//     },
-//   }),
-// });
 
 // routes
 
@@ -103,10 +82,6 @@ app.get("/", (req, res, next) => {
   res.send("server running");
 });
 
-// upload files
-// app.post("/upload", upload.single("file"), (req, res) => {
-//   res.send("Successfully uploaded " + req.file.originalname);
-// });
 
 // get the files
 app.get("/list", async (req, res) => {
