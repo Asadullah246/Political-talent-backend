@@ -14,9 +14,10 @@ const jobSchema = new Schema(
     },
     title: {
       type: String,
-      required: [true, "Question is required "],
+      required: false,
+      // required: [true, "Question is required "],
     },
-    quiz: { type: [quizSchema], required: true },
+    quiz: { type: [quizSchema], required: false }, 
   },
   { timestamps: true }
 );

@@ -55,6 +55,12 @@ const userSchema = new Schema(
     address: {
       type: String,
       required: true,
+
+    },
+    talent: {
+      type: String,
+      required: false,
+
     },
     description: {
       type: String,
