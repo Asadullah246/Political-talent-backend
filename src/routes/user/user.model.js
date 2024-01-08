@@ -62,6 +62,10 @@ const userSchema = new Schema(
       required: false,
 
     },
+    accounttype: {
+      type: String ,
+      required: false,
+    },
     description: {
       type: String,
       required: false,

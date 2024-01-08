@@ -18,6 +18,10 @@ const jobSchema = new Schema(
       type: String,
       required: true,
     },
+    logoImage: {
+      type: String,
+      required: false, 
+    },
   },
   { timestamps: true }
 );
