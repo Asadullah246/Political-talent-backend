@@ -55,10 +55,12 @@ const userSchema = new Schema(
     address: {
       type: String,
       required: true,
+
     },
     talent: {
       type: String,
       required: false,
+
     },
     description: {
       type: String,
@@ -73,7 +75,7 @@ const userSchema = new Schema(
       required: true,
     },
     skills: {
-      type: String,
+      type: String, 
       required: false,
     },
     tittle:{
