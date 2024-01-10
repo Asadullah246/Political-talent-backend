@@ -1,5 +1,21 @@
 import { Schema, model } from "mongoose";
 
+
+const commentSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  comment: { 
+    type: String,
+    required: true,
+  },
+}, { timestamps: true });
+
 const jobSchema = new Schema(
   {
     logoImage: {
@@ -18,6 +34,7 @@ const jobSchema = new Schema(
       type: String,
       required: false,
     },
+    comments: [commentSchema],
   },
   { timestamps: true }
 );
