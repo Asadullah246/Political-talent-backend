@@ -16,7 +16,8 @@ export const patchJob = async ({
   data,
 })=> {
   const query = { _id: new ObjectId(_id) };
-  const updateDoc = { $set: data };
+  // const updateDoc = { $set: data };
+  const updateDoc = { $push: { comments: data } };
   const option = { upsert: true, runValidators: true };
   const result = await Job.findByIdAndUpdate(query, updateDoc, option);
   return result;
