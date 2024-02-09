@@ -51,6 +51,9 @@ import teacher from "./routes/teacher/testimonial.route.js";
 import admin from "./routes/admin/user.route.js";
 import talent from "./routes/talents/user.route.js";
 import experience from "./routes/experience/user.route.js";
+import mentor from "./routes/mentor/user.route.js";
+import org from "./routes/org/user.route.js";
+import constituenly from "./routes/constituenly/user.route.js";
 
 
 
@@ -77,6 +80,9 @@ app.use("/api/v1/admin", admin);
 app.use("/api/v1/teacher", teacher);
 app.use("/api/v1/talentperson", talent);
 app.use("/api/v1/experience", experience);
+app.use("/api/v1/mentor", mentor);
+app.use("/api/v1/organization", org); 
+app.use("/api/v1/constituenly", constituenly);
 
 
 // routes
