@@ -49,6 +49,8 @@ import newslatter from "./routes/newsLatter/testimonial.route.js";
 import askquestions from "./routes/askquestions/testimonial.route.js";
 import teacher from "./routes/teacher/testimonial.route.js";
 import admin from "./routes/admin/user.route.js";
+import talent from "./routes/talents/user.route.js";
+import experience from "./routes/experience/user.route.js";
 
 
 
@@ -73,6 +75,8 @@ app.use("/api/v1/newsletter", newslatter);
 app.use("/api/v1/askquestions", askquestions);
 app.use("/api/v1/admin", admin);
 app.use("/api/v1/teacher", teacher);
+app.use("/api/v1/talentperson", talent);
+app.use("/api/v1/experience", experience);
 
 
 // routes

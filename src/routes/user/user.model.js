@@ -57,7 +57,7 @@ const userSchema = new Schema(
       required: true,
     },
     talent: {
-      type: String,
+      type: Number,
       required: false,
     },
     accounttype: {
