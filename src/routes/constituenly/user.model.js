@@ -14,22 +14,18 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    skills: {
+    organization_Name: {
       type: String,
       required: false,
     },
 
-    experiences: {
+    organization_Address: {
       type: String,
       required: false,
     },
-    address: {
+    organization_Details: {
       type: String,
       required: true,
-    },
-    current_Designation: {
-      type: String,
-      required: false,
     },
     status:{
       type:Number,
@@ -41,7 +37,7 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-const user = model("Talents", userSchema);
+const user = model("Constituenly", userSchema); 
 
 export { user };
 

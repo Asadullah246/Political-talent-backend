@@ -27,8 +27,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    currentDesignation: {
-      type: String, 
+    current_Designation: {
+      type: String,
       required: false,
     },
     status:{

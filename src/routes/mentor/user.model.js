@@ -41,7 +41,7 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-const user = model("Talents", userSchema);
+const user = model("Mentors", userSchema);
 
 export { user };
 
