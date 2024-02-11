@@ -6,6 +6,7 @@ const router = express.Router();
 import mysql from 'mysql2/promise';
 
 let mysqlPool;
+// DATABASE_URL='mysql://anvjhrinycryujsoj4s0:pscale_pw_9YK2HBgP5bQSTkdsV2wLNHrArE8FmBZJn7j58Fb0eO8@aws.connect.psdb.cloud/political?ssl={"rejectUnauthorized":true}' 
 
 
 async function connectToMySQL() {
@@ -13,8 +14,8 @@ async function connectToMySQL() {
     mysqlPool = mysql.createPool({
         connectionLimit: 20,
         host: 'aws.connect.psdb.cloud',
-        user: '4379fr675zq6cdvn1utz',
-        password: 'pscale_pw_6BBUvWpBeGmMAz3Hrj66eKcEeLbAbJmZVUXbvKYb6t6',
+        user: 'anvjhrinycryujsoj4s0',
+        password: 'pscale_pw_9YK2HBgP5bQSTkdsV2wLNHrArE8FmBZJn7j58Fb0eO8',
         database: 'political',
         ssl: {
           rejectUnauthorized: true
@@ -44,7 +45,7 @@ async function checkMySQLConnection(req, res, next) {
 }
 
 // GET all users
-router.get('/api/v1/getallcourse', checkMySQLConnection, async (req, res) => {
+router.get('/api/v1/allcourse', checkMySQLConnection, async (req, res) => {
   try {
     const [rows] = await mysqlPool.query('SELECT * FROM Course');
     // res.json(rows);
@@ -74,7 +75,7 @@ router.get('/api/v1/getallcourse', checkMySQLConnection, async (req, res) => {
 router.get('/api/v1/allcourse/:id', checkMySQLConnection, async (req, res) => {
   const userId = req.params.id;
   try {
-    const [rows] = await mysqlPool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    const [rows] = await mysqlPool.query('SELECT * FROM Course WHERE id = ?', [userId]);
     if (rows.length === 0) {
       return res.status(404).json({ error: 'Course not found' });
     //   res.status(201).json({ status: "success", data: rows });
@@ -89,10 +90,10 @@ router.get('/api/v1/allcourse/:id', checkMySQLConnection, async (req, res) => {
 });
 
 // DELETE a user by ID
-router.delete('/api/allcourse/delete/:id', checkMySQLConnection, async (req, res) => {
+router.delete('/api/v1/allcourse/:id', checkMySQLConnection, async (req, res) => {
   const userId = req.params.id;
   try {
-    await mysqlPool.query('DELETE FROM users WHERE id = ?', [userId]);
+    await mysqlPool.query('DELETE FROM Course WHERE id = ?', [userId]);
     // res.json({ message: 'User deleted successfully' });
     res.status(201).json({ status: "success", message: 'Course deleted successfully'  });
   } catch (error) {
