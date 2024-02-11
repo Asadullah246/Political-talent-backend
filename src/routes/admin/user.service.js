@@ -18,11 +18,11 @@ export const createuser = async (data) => {
   return result;
 };
 
-export const createuser2 = async (data) => {
+export const createuser2 = async (data) => { 
   const findUser = await user.findOne({ email: data.email, password:data.password });
   if (findUser) {
     return findUser
-  //   res.status(200).json({ 
+  //   res.status(200).json({
   //     status:"success",
   //     data:findUser,
   // });

@@ -27,6 +27,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    additional: {
+      type: String,
+      required: false,
+    },
     status:{
       type:Number,
       required:true,
@@ -37,7 +41,7 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-const user = model("Constituenly", userSchema); 
+const user = model("Constituenly", userSchema);
 
 export { user };
 
