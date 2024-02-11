@@ -56,16 +56,29 @@ import experience from "./routes/experience/user.route.js";
 import mentor from "./routes/mentor/user.route.js";
 import org from "./routes/org/user.route.js";
 import constituenly from "./routes/constituenly/user.route.js";
-
-
-
-
+import matchmaking from "./routes/matchmaking/user.route.js";
+import training_workshop_seminar from "./routes/training_workshop_seminar/user.route.js";
+import consultancy from "./routes/consultancy/user.route.js";
+import partner from "./routes/partner/user.route.js";
+import apply_internship from "./routes/apply_internship/user.route.js";
+import contribute_course from "./routes/contribute_course/user.route.js";
+import team_staff from "./routes/team_staff/user.route.js";
 
 
 // connect to database
-dbConnection();
+dbConnection(); 
 
-// use payment route
+// route
+// others buttons
+app.use("/api/v1/matchmaking", matchmaking);
+app.use("/api/v1/training_workshop_seminar", training_workshop_seminar);
+app.use("/api/v1/consultancy", consultancy);
+app.use("/api/v1/partner", partner);
+app.use("/api/v1/apply_internship", apply_internship);
+app.use("/api/v1/contribute_course", contribute_course);
+app.use("/api/v1/team_staff", team_staff);
+// others buttons end
+
 app.use("/api/v1/payment", paymentRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/course", course);
@@ -85,6 +98,7 @@ app.use("/api/v1/experience", experience);
 app.use("/api/v1/mentor", mentor);
 app.use("/api/v1/organization", org);
 app.use("/api/v1/constituenly", constituenly);
+
 
 
 
