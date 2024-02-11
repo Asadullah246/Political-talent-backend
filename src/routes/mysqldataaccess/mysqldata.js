@@ -42,9 +42,9 @@ async function checkMySQLConnection(req, res, next) {
     // res.status(500).json({ error: 'Internal Server Error' });
   }
 }
-
+ 
 // GET all users
-router.get('/api/v1/getallcourse', checkMySQLConnection, async (req, res) => {
+router.get('/api/v1/allcourse', checkMySQLConnection, async (req, res) => {
   try {
     const [rows] = await mysqlPool.query('SELECT * FROM Course');
     // res.json(rows);
