@@ -7,6 +7,7 @@ import mysql from 'mysql2/promise';
 
 let mysqlPool;
 
+
 async function connectToMySQL() {
   try {
     mysqlPool = mysql.createPool({
@@ -45,7 +46,7 @@ async function checkMySQLConnection(req, res, next) {
 // GET all users
 router.get('/api/v1/getallcourse', checkMySQLConnection, async (req, res) => {
   try {
-    const [rows] = await mysqlPool.query('SELECT * FROM course');
+    const [rows] = await mysqlPool.query('SELECT * FROM Course');
     // res.json(rows);
     res.status(201).json({ status: "success", data: rows });
   } catch (error) {
@@ -56,18 +57,18 @@ router.get('/api/v1/getallcourse', checkMySQLConnection, async (req, res) => {
 });
 
 // POST a new user
-router.post('/api/v1/allcourse/insert', checkMySQLConnection, async (req, res) => {
-  const { name, email } = req.body;
-  try {
-    await mysqlPool.query('INSERT INTO users (name, email) VALUES (?, ?)', [name, email]);
-    // res.status(201).json({ message: 'User created successfully' });
-    res.status(201).json({ status:"success",message:"Course created successfully" });
-  } catch (error) {
-    console.error('Error creating user:', error);
-    // res.status(500).json({ error: 'Internal Server Error' });
-    res.status(201).json({ massage: error });
-  }
-});
+// router.post('/api/v1/allcourse/insert', checkMySQLConnection, async (req, res) => {
+//   const { name, email } = req.body;
+//   try {
+//     await mysqlPool.query('INSERT INTO users (name, email) VALUES (?, ?)', [name, email]);
+//     // res.status(201).json({ message: 'User created successfully' });
+//     res.status(201).json({ status:"success",message:"Course created successfully" });
+//   } catch (error) {
+//     console.error('Error creating user:', error);
+//     // res.status(500).json({ error: 'Internal Server Error' });
+//     res.status(201).json({ massage: error });
+//   }
+// });
 
 // GET single user by ID
 router.get('/api/v1/allcourse/:id', checkMySQLConnection, async (req, res) => {
@@ -100,6 +101,7 @@ router.delete('/api/allcourse/delete/:id', checkMySQLConnection, async (req, res
     res.status(201).json({ massage: error });
   }
 });
+
 
 // module.exports = router;
 export default router

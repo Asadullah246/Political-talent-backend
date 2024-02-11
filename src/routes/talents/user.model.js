@@ -31,6 +31,10 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    additional: {
+      type: String,
+      required: false,
+    },
     status:{
       type:Number,
       required:true,

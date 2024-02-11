@@ -87,15 +87,6 @@ app.use("/api/v1/organization", org);
 app.use("/api/v1/constituenly", constituenly);
 
 
-// mysql database manage
-
-// Define routes 
-// app.get('/api/v1/course_manage', getCourse);
-// app.post('/api/v1/course_manage', createCourse);
-// app.get('/api/v1/course_manage/:id', getCourseById);
-// app.delete('/api/v1/course_manage/:id', deleteCourse);
-// mysql database manage end
-
 
 // routes
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const { ObjectId } = mongoose.Types;
-import { user } from "./user.model.js"; 
+import { user } from "./user.model.js";
 
 // create Job
 export const createuser = async (data) => {
@@ -19,7 +19,8 @@ export const patchJob = async ({
   _id,
   data,
 })=> {
-  const query = { _id: new ObjectId(_id) };
+  // const query = { _id: new ObjectId(_id) };
+  const query = { signingId: _id };
   const updateDoc = { $set: data };
   const option = { upsert: true, runValidators: true };
   const result = await user.findByIdAndUpdate(query, updateDoc, option);
