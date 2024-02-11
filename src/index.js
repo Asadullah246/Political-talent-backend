@@ -4,12 +4,14 @@ import dotenv from "dotenv";
 import express from "express";
 // import multer from "multer";
 // import multerS3 from 'multer-s3';
+import routes from "./routes/mysqldataaccess/mysqldata.js"
 const app = express();
 
 
 // use middleware
 app.use(cors());
 app.use(express.json());
+app.use(routes);
 dotenv.config();
 const port = process.env.PORT || 5000;
 
@@ -81,8 +83,18 @@ app.use("/api/v1/teacher", teacher);
 app.use("/api/v1/talentperson", talent);
 app.use("/api/v1/experience", experience);
 app.use("/api/v1/mentor", mentor);
-app.use("/api/v1/organization", org); 
+app.use("/api/v1/organization", org);
 app.use("/api/v1/constituenly", constituenly);
+
+
+// mysql database manage
+
+// Define routes 
+// app.get('/api/v1/course_manage', getCourse);
+// app.post('/api/v1/course_manage', createCourse);
+// app.get('/api/v1/course_manage/:id', getCourseById);
+// app.delete('/api/v1/course_manage/:id', deleteCourse);
+// mysql database manage end
 
 
 // routes
